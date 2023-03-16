@@ -1,15 +1,15 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    id(androidApp)
+    kotlin(kotlinAndroidPlugin)
 }
 
 android {
-    namespace = "com.exolve.android"
-    compileSdk = 33
+    namespace = "com.example.my_first_kmm_project.android"
+    compileSdk = Versions.compile_sdk
     defaultConfig {
-        applicationId = "com.exolve.android"
-        minSdk = 26
-        targetSdk = 33
+        applicationId = "com.example.my_first_kmm_project.android"
+        minSdk = Versions.min_sdk
+        targetSdk = Versions.target_sdk
         versionCode = 1
         versionName = "1.0"
     }
@@ -17,7 +17,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.0"
+        kotlinCompilerExtensionVersion = Versions.compose_compiler_version
     }
     packagingOptions {
         resources {
@@ -29,14 +29,25 @@ android {
             isMinifyEnabled = false
         }
     }
+    buildToolsVersion = Versions.build_tools
 }
 
 dependencies {
     implementation(project(":shared"))
-    implementation("androidx.compose.ui:ui:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
-    implementation("androidx.compose.foundation:foundation:1.2.1")
-    implementation("androidx.compose.material:material:1.2.1")
-    implementation("androidx.activity:activity-compose:1.5.1")
+    Depends.Compose.run {
+        implementation(compiler)
+        implementation(runtime)
+        implementation(runtime_livedata)
+        implementation(ui)
+        implementation(tooling)
+        implementation(foundation)
+        implementation(foundationLayout)
+        implementation(material)
+        implementation(material_icons)
+        implementation(activity)
+    }
+    Depends.run {
+        implementation(napier)
+        implementation(material)
+    }
 }

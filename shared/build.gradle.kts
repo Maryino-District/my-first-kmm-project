@@ -1,27 +1,28 @@
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
+    kotlin(kotlinMultiplatformPlugin)
+    kotlin(cocoapods)
+    id(androidLib)
 }
 
 kotlin {
     android()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
+    cocoapods {
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        version = "1.0"
+        ios.deploymentTarget = "14.1"
+        podfile = project.file("../iosApp/Podfile")
+        framework {
             baseName = "shared"
         }
     }
-
+    
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
-            }
-        }
+        val commonMain by getting
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -51,10 +52,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.exolve"
-    compileSdk = 32
+    namespace = "com.example.my_first_kmm_project"
+    compileSdk = Versions.compile_sdk
     defaultConfig {
-        minSdk = 26
-        targetSdk = 32
+        minSdk = Versions.min_sdk
+        targetSdk = Versions.target_sdk
     }
+    buildToolsVersion = Versions.build_tools
 }

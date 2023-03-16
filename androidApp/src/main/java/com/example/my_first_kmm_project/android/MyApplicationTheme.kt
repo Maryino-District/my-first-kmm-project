@@ -1,4 +1,4 @@
-package com.exolve.android
+package com.example.my_first_kmm_project.android
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

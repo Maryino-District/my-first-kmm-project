@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "sample-kmm"
+rootProject.name = "my-first-kmm-project"
 include(":androidApp")
 include(":shared")
